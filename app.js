@@ -17,6 +17,7 @@ connnect_database();
 
 
 //  track router 
+app.use('/helpCheck', (req, res) => { res.status(200).send('ok') });
 app.use('/api/track', song_router);
 app.use('/api/album', album_router);
 
