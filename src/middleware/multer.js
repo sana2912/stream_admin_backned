@@ -7,10 +7,8 @@ const storage = multer.diskStorage({
             callback(null, './stream/image');
         } else if (file.fieldname === 'audio') {
             callback(null, './stream/audio');
-        } else if (file.fieldname === 'album_img') {
-            callback(null, './stream/album');
         } else {
-            callback(new Error('Invalid file field'), null);
+            callback(null, './stream/album');
         }
     },
     filename: function (req, file, callback) {
