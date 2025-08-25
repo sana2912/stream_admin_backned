@@ -46,7 +46,7 @@ npm install
 ### Running the App
 
 ```bash
-npm start
+node app.js
 ```
 
 ### Configuration
