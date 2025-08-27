@@ -1,4 +1,4 @@
-# Streaming Admin Backend
+# Streaming Admin Backend(suapensed)
 - **see this service** [streaming user backned](https://stream-admin-backned.onrender.com)  
 This is the backend service for a song album streaming app, designed for admin operations. The primary functions allow an admin to upload, create, and delete album and track data.
 
