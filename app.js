@@ -8,16 +8,25 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-// {
-//     origin: 'http://localhost:5173',
-//     credentials: true,
-// })
+require('dotenv').config();
+const whitelist = [
+  process.env.CLIENT_ORIGIN,
+  'http://localhost:5173'
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
 
 connnect_database();
 
 app.get('/', (req, res) => {
-    res.send(`
+  res.send(`
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +86,7 @@ app.get('/', (req, res) => {
   <h1>🎵 Streaming Backend (admin)</h1>
   <p>Your backend is running smoothly 🚀</p>
   <div class="button-container">
-    <a href="https://stream-admin.netlify.app" class="button" target="_blank">
+    <a href="${process.env.CLIENT_ORIGIN}" class="button" target="_blank">
       frontend page
     </a>
     <a href="https://github.com/sana2912/stream_admin_backned.git" class="button" target="_blank">
@@ -97,5 +106,5 @@ app.use('/api/track', song_router);
 app.use('/api/album', album_router);
 
 app.listen(port, (req, res) => {
-    console.log('now sever is started');
+  console.log('now sever is started');
 })
